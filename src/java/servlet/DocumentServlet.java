@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author AlexanderSteen
  */
 @WebServlet(name = "DocumentServlet", urlPatterns = {"/Document"})
-public class DocumentServlet extends HttpServlet {
+public class DocumentServlet extends BaseServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
