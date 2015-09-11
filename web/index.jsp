@@ -14,9 +14,9 @@
         <title>Index</title>
     </head>
     <body>
-        <h1>Index</h1>
+        <h1><a href="https://dl.dropboxusercontent.com/u/19523893/CA-ChatServer-Client.jar" target="_blank">Download client</a></h1>
         <div>
-            <form action="/Document" method="POST">
+            <form action="Document" method="POST">
                 <label>Password</label>
                 <input name="password" type="password" />
                 <input type="submit" value="Log Ind" />
