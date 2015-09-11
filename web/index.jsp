@@ -4,6 +4,8 @@
     Author     : AlexanderSteen
 --%>
 
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,13 +14,18 @@
         <title>Index</title>
     </head>
     <body>
-        <h1>HALLLO World!</h1>
+        <h1>Index</h1>
         <div>
-            <form action="/Document" method="POST">
+            <form action="" method="POST">
                 <label>Password</label>
                 <input name="password" type="password" />
                 <input type="submit" value="Log Ind" />
             </form>
+            <c:if test="{isFailed}">
+                <div>
+                    <span>Password ikke godkendt</span>
+                </div>
+            </c:if>
             <small>Password: admin</small>
         </div>
     </body>

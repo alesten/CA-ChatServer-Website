@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author AlexanderSteen
  */
 @WebServlet(name = "DocumentServlet", urlPatterns = {"/Document"})
-public class DocumentServlet extends BaseServlet {
+public class DocumentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,15 +31,11 @@ public class DocumentServlet extends BaseServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String password = request.getParameter("password");
-        if(!(password != null && !password.isEmpty()) || !password.equals("admin")){
-            request.setAttribute("isFailed", true);
-            request.getSession().setAttribute("loggedin", false);
-            forward("index.jsp", request, response);
-        }
-        request.getSession().setAttribute("loggedin", true);
-        forward("document.jsp", request, response);
-        
+        Object loggedin = request.getSession().getAttribute("loggedin");
+        if(loggedin == null || !(boolean)request.getSession().getAttribute("loggedin"))
+            response.sendRedirect("");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("document.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,7 +50,7 @@ public class DocumentServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("/");
+        processRequest(request, response);
     }
 
     /**
