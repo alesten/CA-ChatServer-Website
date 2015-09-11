@@ -30,19 +30,15 @@ public class DocumentServlet extends BaseServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DocumentServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DocumentServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String password = request.getParameter("password");
+        if(!(password != null && !password.isEmpty()) || !password.equals("admin")){
+            request.setAttribute("isFailed", true);
+            request.getSession().setAttribute("loggedin", false);
+            forward("index.jsp", request, response);
         }
+        request.getSession().setAttribute("loggedin", true);
+        forward("document.jsp", request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +53,7 @@ public class DocumentServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("/");
     }
 
     /**

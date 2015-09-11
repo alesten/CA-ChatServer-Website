@@ -9,9 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Index</title>
     </head>
     <body>
         <h1>HALLLO World!</h1>
+        <div>
+            <form action="/Document" method="POST">
+                <label>Password</label>
+                <input name="password" type="password" />
+                <input type="submit" value="Log Ind" />
+            </form>
+            <small>Password: admin</small>
+        </div>
     </body>
 </html>
