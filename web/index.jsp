@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <a href="CA-ChatServer-Client.jar" target="_blank" download>Download link</a>
         <h1>HALLLO World!</h1>
     </body>
 </html>
