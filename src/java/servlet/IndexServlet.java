@@ -62,18 +62,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String password = request.getParameter("password");
-        if (!(password != null && !password.isEmpty()) || !password.equals("admin")) {
-            request.setAttribute("isFailed", true);
-            System.out.println("No logged in");
-
-            request.getSession().setAttribute("loggedin", false);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-            dispatcher.forward(request, response);
-        }
-        System.out.println("Logged in");
-        request.getSession().setAttribute("loggedin", true);
-        response.sendRedirect("/Document");
+        processRequest(request, response);
     }
 
     /**

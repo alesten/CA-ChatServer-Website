@@ -31,11 +31,13 @@ public class DocumentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Object loggedin = request.getSession().getAttribute("loggedin");
-        if(loggedin == null || !(boolean)request.getSession().getAttribute("loggedin"))
-            response.sendRedirect("");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("document.jsp");
-        dispatcher.forward(request, response);
+        if (request.getSession().getAttribute("loggedin") != null) {
+            if ((boolean) request.getSession().getAttribute("loggedin")) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("document.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+        response.sendRedirect("");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +66,16 @@ public class DocumentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String password = request.getParameter("password");
+        if (!(password != null && !password.isEmpty()) || !password.equals("admin")) {
+            request.setAttribute("isFailed", true);
+            request.getSession().setAttribute("loggedin", false);
+            response.sendRedirect("");
+            return;
+        }
+        request.getSession().setAttribute("loggedin", true);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("document.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
