@@ -16,16 +16,11 @@
     <body>
         <h1>Index</h1>
         <div>
-            <form action="" method="POST">
+            <form action="/Document" method="POST">
                 <label>Password</label>
                 <input name="password" type="password" />
                 <input type="submit" value="Log Ind" />
             </form>
-            <c:if test="{isFailed}">
-                <div>
-                    <span>Password ikke godkendt</span>
-                </div>
-            </c:if>
             <small>Password: admin</small>
         </div>
     </body>
